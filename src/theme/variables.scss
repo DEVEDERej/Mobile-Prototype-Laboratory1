@@ -1,2 +1,113 @@
-// For information on how to create your own theme, please refer to:
-// https://ionicframework.com/docs/theming/
+// Ionic theming for the Laboratory 1 prototype.
+//
+// One restrained palette: a market/public-service green carries the identity,
+// everything else is neutral, and colour is only spent on status meaning.
+// Statuses are reduced to three tones instead of one colour per status:
+//   action   — the applicant/vendor has something to do
+//   progress — an office is working on it
+//   done     — that step is settled
+//   idle     — nothing to report yet
+// These are prototype colours only: no official seal, logo or government
+// branding is used.
+// See https://ionicframework.com/docs/theming/
+
+:root {
+  // Ionic leaves --ion-text-color undefined in the light theme, so headings that
+  // ask for it fall back to the grey used inside cards. Setting it explicitly
+  // keeps titles readable; the dark block below restores the light-on-dark value.
+  // Warm near-black rather than a cool slate, to match the paper-toned palette.
+  --ion-text-color: #201c15;
+  --ion-text-color-rgb: 32, 28, 21;
+
+  --ion-color-primary: #16704a;
+  --ion-color-primary-rgb: 22, 112, 74;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #136341;
+  --ion-color-primary-tint: #2d7e5c;
+
+  --ion-color-secondary: #2f6fb0;
+  --ion-color-secondary-rgb: 47, 111, 176;
+  --ion-color-secondary-contrast: #ffffff;
+  --ion-color-secondary-contrast-rgb: 255, 255, 255;
+  --ion-color-secondary-shade: #29629b;
+  --ion-color-secondary-tint: #447db8;
+
+  // Ionic's default success green is very bright next to this palette.
+  --ion-color-success: #1f9d55;
+  --ion-color-success-rgb: 31, 157, 85;
+  --ion-color-success-contrast: #ffffff;
+  --ion-color-success-contrast-rgb: 255, 255, 255;
+  --ion-color-success-shade: #1b8a4b;
+  --ion-color-success-tint: #35a766;
+
+  // --- Surfaces and lines -------------------------------------------------
+  // A warm, paper-toned civic palette instead of a cool developer-grey one:
+  // soft ivory page, white surfaces, warm neutral lines.
+  --app-page: #faf7f1;
+  --app-surface: #ffffff;
+  --app-surface-sunken: #f1ebde;
+  --app-line: #e7dfcf;
+  --app-line-strong: #cbbfa5;
+  --app-muted: #746c58;
+
+  // --- Status tones -------------------------------------------------------
+  --app-tone-action: #92600e;
+  --app-tone-action-soft: rgb(146 96 14 / 10%);
+  --app-tone-progress: #2b6394;
+  --app-tone-progress-soft: rgb(43 99 148 / 10%);
+  --app-tone-done: #16704a;
+  --app-tone-done-soft: rgb(22 112 74 / 10%);
+  --app-tone-idle: #746c58;
+  --app-tone-idle-soft: rgb(116 108 88 / 10%);
+
+  // --- Header ---------------------------------------------------------------
+  // A fixed brand green for every toolbar, independent of light/dark mode.
+  --app-header-bg: #558b2f;
+  --app-header-color: #ffffff;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ion-text-color: #f3efe4;
+    --ion-text-color-rgb: 243, 239, 228;
+
+    --ion-color-primary: #3fa87a;
+    --ion-color-primary-rgb: 63, 168, 122;
+    --ion-color-primary-contrast: #06120d;
+    --ion-color-primary-contrast-rgb: 6, 18, 13;
+    --ion-color-primary-shade: #37946b;
+    --ion-color-primary-tint: #52b187;
+
+    --ion-color-secondary: #5b9bd5;
+    --ion-color-secondary-rgb: 91, 155, 213;
+    --ion-color-secondary-contrast: #06121c;
+    --ion-color-secondary-contrast-rgb: 6, 18, 28;
+    --ion-color-secondary-shade: #5088bb;
+    --ion-color-secondary-tint: #6ba5d9;
+
+    --ion-color-success: #3ac47d;
+    --ion-color-success-rgb: 58, 196, 125;
+    --ion-color-success-contrast: #04140b;
+    --ion-color-success-contrast-rgb: 4, 20, 11;
+    --ion-color-success-shade: #33ac6e;
+    --ion-color-success-tint: #4eca8a;
+
+    // A warm charcoal, not a flat "developer tool" black.
+    --app-page: #17140e;
+    --app-surface: #211d15;
+    --app-surface-sunken: #2b2518;
+    --app-line: #37301f;
+    --app-line-strong: #4f4830;
+    --app-muted: #a89f87;
+
+    --app-tone-action: #dda852;
+    --app-tone-action-soft: rgb(221 168 82 / 14%);
+    --app-tone-progress: #7fb1de;
+    --app-tone-progress-soft: rgb(127 177 222 / 14%);
+    --app-tone-done: #4fc188;
+    --app-tone-done-soft: rgb(79 193 136 / 14%);
+    --app-tone-idle: #a89f87;
+    --app-tone-idle-soft: rgb(168 159 135 / 14%);
+  }
+}

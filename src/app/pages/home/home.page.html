@@ -1,0 +1,77 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Cabanatuan Public Market</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="shell">
+    <header class="masthead">
+      <p class="masthead__eyebrow">Cabanatuan City Public Market</p>
+      <h1 class="masthead__title">Mobile Vendor Services</h1>
+    </header>
+
+    <app-section-heading heading="Services" />
+
+    <ion-grid class="services">
+      <ion-row>
+        <ion-col size="12" size-md="6">
+          <ion-card class="service" button [routerLink]="['/stall-applications']">
+            <ion-card-header>
+              <ion-card-title>Stall Application</ion-card-title>
+            </ion-card-header>
+
+            <ion-card-content>
+              Track applications and their processing status.
+
+              <p class="service__meta">
+                <span>{{ applicationCount() }} applications on record</span>
+
+                @if (awaitingInformationCount() > 0) {
+                  <span>{{ awaitingInformationCount() }} awaiting requested information</span>
+                }
+              </p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+
+        <ion-col size="12" size-md="6">
+          <ion-card class="service" button [routerLink]="['/hawker-permits']">
+            <ion-card-header>
+              <ion-card-title>Hawker / Ambulant Permit</ion-card-title>
+            </ion-card-header>
+
+            <ion-card-content>
+              View permit information, daily ticket state and renewal availability.
+
+              <p class="service__meta">
+                <span>{{ permitCount() }} permits on record</span>
+
+                @if (approvedPermitCount() > 0) {
+                  <span>{{ approvedPermitCount() }} approved</span>
+                }
+              </p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <app-section-heading heading="Recent activity" note="Latest updates across both services." />
+
+    <ion-list class="activity" lines="full">
+      @for (record of recentRecords(); track record.id) {
+        <app-record-card
+          [compact]="true"
+          [title]="record.title"
+          [reference]="record.reference"
+          [context]="record.context ?? ''"
+          [statusLabel]="record.statusLabel"
+          [statusTone]="record.statusTone"
+          [details]="record.details"
+          (opened)="openRecord(record)"
+        />
+      }
+    </ion-list>
+  </div>
+</ion-content>

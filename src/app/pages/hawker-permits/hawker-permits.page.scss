@@ -1,0 +1,13 @@
+// A list of permits benefits from a bit more width than a reading-heavy
+// detail page, without stretching to the full desktop viewport.
+:host {
+  --shell-max: 760px;
+}
+
+// Permits read as individual ion-cards rather than rows in one shared list
+// (set in record-card.component.scss); the gap between them comes from here.
+.permit-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}

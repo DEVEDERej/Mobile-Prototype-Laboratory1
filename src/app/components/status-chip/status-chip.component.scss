@@ -1,0 +1,37 @@
+:host {
+  display: inline-flex;
+  max-width: 100%;
+}
+
+// The plain ion-badge look, coloured by the tone the caller passes in — no
+// dot, no icon, just the status text at the weight the type scale gives every
+// status (600).
+ion-badge.status {
+  --background: transparent;
+  --color: var(--tone);
+  --padding-top: 0;
+  --padding-end: 0;
+  --padding-bottom: 0;
+  --padding-start: 0;
+  max-width: 100%;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.35;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  box-shadow: none;
+}
+
+// Headline presentation on a detail page: the same badge, lifted onto a soft
+// tint of its own tone so it reads as the state of the whole record.
+ion-badge.status--chip {
+  --background: var(--tone-soft);
+  --color: var(--tone);
+  --padding-top: 7px;
+  --padding-end: 12px;
+  --padding-bottom: 7px;
+  --padding-start: 12px;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+}

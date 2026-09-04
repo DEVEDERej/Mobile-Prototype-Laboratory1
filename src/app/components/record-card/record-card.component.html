@@ -1,0 +1,71 @@
+@if (kind() === 'permit' && !compact()) {
+  <!-- Permit / credential presentation: a genuine ion-card, because a permit
+       is a standing document rather than a row in a workflow list. -->
+  <ion-card class="record record--permit" button (click)="opened.emit()">
+    <ion-card-content>
+      <p class="reference">{{ reference() }}</p>
+      <h2 class="record__title">{{ title() }}</h2>
+
+      <app-status-chip [label]="statusLabel()" [tone]="statusTone()" />
+
+      @if (details().length > 0) {
+        <ion-grid class="record__fields">
+          <ion-row>
+            @for (detail of details(); track detail.label) {
+              <ion-col size="6">
+                <app-detail-row layout="stacked" [label]="detail.label" [value]="detail.value" />
+              </ion-col>
+            }
+          </ion-row>
+        </ion-grid>
+      }
+    </ion-card-content>
+  </ion-card>
+} @else {
+  <!-- Application / activity presentation: a genuine ion-item, so it sits in
+       an ion-list with Ionic's own dividers doing the grouping. -->
+  <ion-item
+    class="record"
+    [class.record--compact]="compact()"
+    button
+    [detail]="false"
+    lines="full"
+    (click)="opened.emit()"
+  >
+    <ion-label>
+      <!-- In the compact presentation the reference moves down into the meta
+           line, because there the module and the date matter more. -->
+      @if (!compact()) {
+        <p class="reference">{{ reference() }}</p>
+      }
+
+      <h2 class="record__title">{{ title() }}</h2>
+
+      <app-status-chip [label]="statusLabel()" [tone]="statusTone()" />
+
+      @if (compact()) {
+        <p class="record__meta">
+          @if (context()) {
+            <span>{{ context() }}</span>
+          }
+
+          <span>{{ reference() }}</span>
+
+          @for (detail of details(); track detail.label) {
+            <span>{{ detail.label }} {{ detail.value }}</span>
+          }
+        </p>
+      } @else if (details().length > 0) {
+        <ion-grid class="record__fields">
+          <ion-row>
+            @for (detail of details(); track detail.label) {
+              <ion-col size="6">
+                <app-detail-row layout="stacked" [label]="detail.label" [value]="detail.value" />
+              </ion-col>
+            }
+          </ion-row>
+        </ion-grid>
+      }
+    </ion-label>
+  </ion-item>
+}

@@ -68,3 +68,14 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Claude Code local state
+.claude/
+
+# Lab-only notes and guides, not part of the app
+/LAB1-DEMO-GUIDE-SIMPLE.md
+/LAB1-DEMO-GUIDE.md
+/LAB1-FULL-DOCUMENTATION.md
+/LAB1-PRESENTATION-SCRIPT.md
+/documentation.md
+/memoryforlab.md

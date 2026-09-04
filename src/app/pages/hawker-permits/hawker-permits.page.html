@@ -1,0 +1,43 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Hawker / Ambulant Permit</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="shell">
+    <p class="page-lead">
+      Hawker and ambulant permits on record. A permit is an obligation of its
+      own, separate from a market stall.
+    </p>
+
+    <app-section-heading
+      heading="Permits"
+      [note]="permits().length + ' permits on record · ' + approvedCount() + ' approved'"
+    />
+
+    @if (permits().length > 0) {
+      <div class="permit-stack">
+        @for (permit of permits(); track permit.id) {
+          <app-record-card
+            kind="permit"
+            [title]="permit.title"
+            [reference]="permit.reference"
+            [statusLabel]="permit.statusLabel"
+            [statusTone]="permit.statusTone"
+            [details]="permit.details"
+            (opened)="openPermit(permit)"
+          />
+        }
+      </div>
+    } @else {
+      <app-empty-state
+        title="No permits on record"
+        message="There is no hawker or ambulant permit in the prototype data."
+      />
+    }
+  </div>
+</ion-content>

@@ -1,0 +1,77 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Stall Application</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="shell">
+    <p class="page-lead">
+      Stall applications on record, with the office currently handling each one.
+    </p>
+
+    <!-- Search and filter belong to the page, not to a toolbar above it. -->
+    <ion-searchbar
+      class="find"
+      placeholder="Search applicant or reference"
+      [ngModel]="searchTerm()"
+      (ngModelChange)="searchTerm.set($event)"
+      [debounce]="150"
+    ></ion-searchbar>
+
+    <div class="filter">
+      <ion-label class="filter__label">Handled by</ion-label>
+
+      <ion-segment
+        [value]="officeFilter()"
+        (ionChange)="onOfficeFilterChange($event.detail.value)"
+      >
+        <ion-segment-button value="all">All</ion-segment-button>
+        <ion-segment-button value="Treasury">Treasury</ion-segment-button>
+        <ion-segment-button value="CEEMO">CEEMO</ion-segment-button>
+      </ion-segment>
+    </div>
+
+    <app-section-heading
+      heading="Applications"
+      [note]="'Showing ' + filteredApplications().length + ' of ' + totalCount() + ' applications'"
+    />
+
+    @if (filteredApplications().length > 0) {
+      <ion-list class="records" lines="full">
+        @for (application of filteredApplications(); track application.id) {
+          <app-record-card
+            [title]="application.title"
+            [reference]="application.reference"
+            [statusLabel]="application.statusLabel"
+            [statusTone]="application.statusTone"
+            [details]="application.details"
+            (opened)="openApplication(application)"
+          />
+        }
+      </ion-list>
+    } @else if (hasActiveFilter()) {
+      <app-empty-state
+        title="No matching application"
+        message="No stall application matches this search or filter."
+      />
+
+      <ion-button
+        class="clear-filters"
+        expand="block"
+        fill="outline"
+        (click)="clearFilters()"
+      >
+        Clear search and filter
+      </ion-button>
+    } @else {
+      <app-empty-state
+        title="No stall applications"
+        message="There is no stall application on record yet."
+      />
+    }
+  </div>
+</ion-content>

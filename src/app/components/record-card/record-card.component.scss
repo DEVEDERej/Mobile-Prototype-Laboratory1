@@ -1,0 +1,89 @@
+:host {
+  display: block;
+}
+
+// ---------------------------------------------------------------------------
+// Application / activity presentation — ion-item
+// ---------------------------------------------------------------------------
+
+ion-item.record {
+  --background: transparent;
+  --background-hover: var(--app-surface-sunken);
+  --background-activated: var(--app-surface-sunken);
+  --padding-start: var(--sp-4);
+  --inner-padding-end: var(--sp-4);
+  --padding-top: var(--sp-3);
+  --padding-bottom: var(--sp-3);
+
+  ion-label {
+    margin-top: var(--sp-3);
+    margin-bottom: var(--sp-3);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Permit / credential presentation — ion-card
+// ---------------------------------------------------------------------------
+
+ion-card.record--permit {
+  --background: var(--app-surface);
+  margin: 0;
+
+  ion-card-content {
+    padding: var(--sp-4);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Shared identity typography
+// ---------------------------------------------------------------------------
+
+.record__title {
+  margin: 0 0 var(--sp-2);
+  font-family: var(--font-body);
+  font-size: 1.04rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--ion-text-color);
+  overflow-wrap: anywhere;
+}
+
+.record--compact .record__title {
+  font-size: 0.94rem;
+}
+
+app-status-chip {
+  display: block;
+  margin-top: var(--sp-2);
+}
+
+// Two identifying fields side by side, via a genuine ion-grid rather than a
+// hand-rolled CSS grid.
+.record__fields {
+  padding: 0;
+  margin-top: var(--sp-3);
+
+  ion-row {
+    margin-inline: calc(var(--sp-3) / -2);
+  }
+
+  ion-col {
+    padding: 0 calc(var(--sp-3) / 2);
+  }
+}
+
+// Module, reference and date on one quiet line, separated by middots.
+.record__meta {
+  margin: var(--sp-2) 0 0;
+  font-family: var(--font-body);
+  font-size: 0.76rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--app-muted);
+  overflow-wrap: anywhere;
+
+  span + span::before {
+    content: '·';
+    margin: 0 6px;
+  }
+}

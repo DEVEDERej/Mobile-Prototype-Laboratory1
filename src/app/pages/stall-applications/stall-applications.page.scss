@@ -1,0 +1,67 @@
+// A list of transaction records benefits from a bit more width than a
+// reading-heavy detail page, without stretching to the full desktop viewport.
+:host {
+  --shell-max: 760px;
+}
+
+// Search field: a plain bordered input that sits on the page, not a floating
+// pill in a dashboard toolbar.
+ion-searchbar.find {
+  --background: var(--app-surface);
+  --box-shadow: none;
+  --border-radius: var(--radius-md);
+  --color: var(--ion-text-color);
+  --placeholder-color: var(--app-muted);
+  --icon-color: var(--app-muted);
+  padding: 0;
+  margin-bottom: var(--sp-4);
+  border: 1px solid var(--app-line);
+  border-radius: var(--radius-md);
+}
+
+ion-label.filter__label {
+  display: block;
+  margin: 0 0 var(--sp-2);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--app-muted);
+}
+
+// The list of application rows sits directly on the page background — a
+// plain ion-list, not a card wrapping it.
+ion-list.records {
+  padding: 0;
+  background: transparent;
+}
+
+// A segmented control rather than a row of coloured pills: three mutually
+// exclusive views of the same list.
+.filter ion-segment {
+  --background: var(--app-surface-sunken);
+  border: 1px solid var(--app-line);
+  border-radius: var(--radius-md);
+  padding: 3px;
+}
+
+.filter ion-segment-button {
+  --background-checked: var(--app-surface);
+  --indicator-color: var(--app-surface);
+  --indicator-box-shadow: none;
+  --color: var(--app-muted);
+  --color-checked: var(--ion-color-primary);
+  --border-radius: var(--radius-sm);
+  --padding-top: 0;
+  --padding-bottom: 0;
+  min-height: 44px;
+  min-width: 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.clear-filters {
+  margin-top: var(--sp-4);
+}

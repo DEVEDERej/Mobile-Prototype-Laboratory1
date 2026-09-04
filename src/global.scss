@@ -1,13 +1,18 @@
 /*
  * App Global CSS
  * ----------------------------------------------------------------------------
- * Put style rules here that you want to apply globally. These styles are for
- * the entire app and not just one component. Additionally, this file can be
- * used as an entry point to import other CSS/Sass files to be included in the
- * output CSS.
- * For more information on global stylesheets, visit the documentation:
- * https://ionicframework.com/docs/layout/global-stylesheets
+ * Ionic's own stylesheets, followed by the small design system the Laboratory 1
+ * pages are built from. Everything below is layout, spacing and typography that
+ * more than one page needs, so no page invents its own version of it.
  */
+
+/* Manrope, self-hosted via @fontsource so the app never depends on a runtime
+   font CDN. Four weights only: 400 body, 500 labels/metadata, 600 references
+   and statuses, 700 headings and names — see the type scale below. */
+@import "@fontsource/manrope/400.css";
+@import "@fontsource/manrope/500.css";
+@import "@fontsource/manrope/600.css";
+@import "@fontsource/manrope/700.css";
 
 /* Core CSS required for Ionic components to work properly */
 @import "@ionic/angular/css/core.css";
@@ -35,3 +40,244 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
+
+/* ==========================================================================
+   1. Layout scale
+   Spacing, radius and the width of the readable column. Colour tokens live in
+   theme/variables.scss.
+   ========================================================================== */
+
+:root {
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 28px;
+  --sp-7: 36px;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+
+  --font-body: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Helvetica, Arial, sans-serif;
+  --ion-font-family: var(--font-body);
+  --ion-default-font: var(--font-body);
+
+  /* The app is designed mobile-first. On a wider viewport the content stays a
+     genuine reading/working width instead of stretching a label to one edge
+     and its value to the other, but it stays flush to the left edge rather
+     than centring in the middle of the viewport. Home and the two list pages
+     widen this further; see their own :host overrides. */
+  --shell-max: 640px;
+  --shell-pad: var(--sp-4);
+}
+
+body {
+  font-family: var(--font-body);
+}
+
+/* ==========================================================================
+   2. Ionic chrome
+   ========================================================================== */
+
+ion-content {
+  --background: var(--app-page);
+}
+
+/* A solid brand-green header on every page. The title sits on the left, next
+   to the back button, not centred. */
+ion-toolbar {
+  --background: var(--app-header-bg);
+  --color: var(--app-header-color);
+  --border-width: 0;
+  --padding-start: var(--shell-pad);
+  --padding-end: var(--shell-pad);
+  --padding-top: 2px;
+  --padding-bottom: 2px;
+}
+
+ion-back-button {
+  --color: var(--app-header-color);
+}
+
+ion-title {
+  --color: var(--app-header-color);
+  padding-inline: 0;
+  font-family: var(--font-body);
+  font-size: 1.02rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-align: start;
+}
+
+ion-button {
+  --border-radius: var(--radius-md);
+  --box-shadow: none;
+  font-family: var(--font-body);
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+ion-button[expand='block'] {
+  height: 46px;
+  margin: 0;
+}
+
+ion-searchbar,
+ion-segment-button,
+ion-item {
+  font-family: var(--font-body);
+}
+
+/* ==========================================================================
+   3. The content column
+   ========================================================================== */
+
+.shell {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--shell-max);
+  margin-inline: 0;
+  padding: var(--sp-5) var(--shell-pad) var(--sp-7);
+}
+
+/* ==========================================================================
+   4. Typography
+   ========================================================================== */
+
+.masthead {
+  margin-bottom: var(--sp-6);
+}
+
+.masthead__eyebrow {
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--app-muted);
+}
+
+/* Major page title: the one place in the app that earns the full 26–28px/700
+   Manrope treatment. */
+.masthead__title {
+  margin: 6px 0 0;
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.18;
+  letter-spacing: -0.015em;
+  color: var(--ion-text-color);
+}
+
+/* One explanatory line under a sub-page toolbar. */
+.page-lead {
+  margin: 0 0 var(--sp-5);
+  max-width: 46ch;
+  font-size: 0.88rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--app-muted);
+}
+
+/* Reference numbers: a small ledger/serial treatment — readable, evenly
+   spaced, but never the loudest thing on the screen. */
+.reference {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  font-variant-numeric: tabular-nums;
+  color: var(--app-muted);
+  overflow-wrap: anywhere;
+}
+
+.record-name {
+  margin: var(--sp-1) 0 var(--sp-3);
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.28;
+  letter-spacing: -0.01em;
+  color: var(--ion-text-color);
+  overflow-wrap: anywhere;
+}
+
+ion-note.prototype-note {
+  display: block;
+  margin: var(--sp-6) 0 0;
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--app-line);
+  font-size: 0.76rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--app-muted);
+}
+
+/* ==========================================================================
+   5. Ionic components — theming, not replacing
+   Every list, card, item, badge and note below is a genuine Ionic component;
+   this section only carries them into the app's own palette and type scale.
+   Grouping itself comes from ion-list / ion-item / ion-card, not custom
+   bordered divs.
+   ========================================================================== */
+
+ion-list {
+  --ion-item-background: var(--app-surface);
+}
+
+ion-item {
+  --border-color: var(--app-line);
+}
+
+ion-card {
+  border-radius: var(--radius-lg);
+  font-family: var(--font-body);
+}
+
+ion-card-title {
+  font-family: var(--font-body);
+}
+
+ion-note,
+ion-label {
+  font-family: var(--font-body);
+}
+
+/* ==========================================================================
+   6. Status tones
+   A single place that turns a tone name into the colours that express it, so a
+   status looks the same wherever it is shown.
+   ========================================================================== */
+
+[data-tone='action'] {
+  --tone: var(--app-tone-action);
+  --tone-soft: var(--app-tone-action-soft);
+}
+
+[data-tone='progress'] {
+  --tone: var(--app-tone-progress);
+  --tone-soft: var(--app-tone-progress-soft);
+}
+
+[data-tone='done'] {
+  --tone: var(--app-tone-done);
+  --tone-soft: var(--app-tone-done-soft);
+}
+
+[data-tone='idle'] {
+  --tone: var(--app-tone-idle);
+  --tone-soft: var(--app-tone-idle-soft);
+}
+
+/* A short confirmation line, e.g. after a renewal request is recorded. */
+ion-note.notice {
+  display: block;
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--tone, var(--app-muted));
+}

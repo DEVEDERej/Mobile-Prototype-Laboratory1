@@ -1,0 +1,11 @@
+@if (layout() === 'stacked') {
+  <div class="detail-row detail-row--stacked">
+    <ion-note class="detail-row__label">{{ label() }}</ion-note>
+    <ion-text class="detail-row__value">{{ value() }}</ion-text>
+  </div>
+} @else {
+  <ion-item class="detail-row" lines="full" [detail]="false">
+    <ion-label>{{ label() }}</ion-label>
+    <ion-note slot="end" class="detail-row__value">{{ value() }}</ion-note>
+  </ion-item>
+}

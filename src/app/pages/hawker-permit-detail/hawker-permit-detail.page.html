@@ -1,0 +1,93 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/hawker-permits" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Permit</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="shell">
+    @if (permit(); as record) {
+      <!--
+        The permit's identity and its fields belong together as one document —
+        unlike the stall application, which stays flat sections on the page —
+        so this is the one detail page in the app that uses an ion-card for its
+        top section.
+      -->
+      <ion-card class="permit-card">
+        <ion-card-content>
+          <header class="summary">
+            <p class="masthead__eyebrow">Hawker / Ambulant Permit</p>
+            <p class="reference">{{ record.permitNo }}</p>
+            <h1 class="record-name">{{ record.vendorName }}</h1>
+
+            <app-status-chip variant="chip" [label]="stateLabel()" [tone]="stateTone()" />
+          </header>
+
+          <ion-list class="fields fields--card" lines="full">
+            <app-detail-row label="Goods vended" [value]="record.goodsVended" />
+
+            <!-- Validity dates only exist once a permit has been approved. -->
+            @if (record.validFrom && record.validUntil) {
+              <app-detail-row label="Valid from" [value]="record.validFrom" />
+              <app-detail-row label="Valid until" [value]="record.validUntil" />
+            }
+
+            <app-detail-row label="Last updated" [value]="record.lastUpdatedOn" />
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+
+      @if (record.approved) {
+        <app-section-heading heading="Daily ambulant ticket" />
+
+        <ion-card class="ticket">
+          <ion-card-content>
+            @if (record.dailyTicketIssuedToday) {
+              <h3 class="ticket__state">Issued today</h3>
+            } @else {
+              <h3 class="ticket__state">Not yet issued today</h3>
+            }
+
+            <p class="ticket__note">
+              Ambulant tickets are tracked separately from stall tickets, so a
+              vendor who also holds a stall has two separate daily tickets.
+            </p>
+          </ion-card-content>
+        </ion-card>
+      }
+
+      <app-section-heading heading="Permit renewal" />
+
+      @if (canRequestRenewal()) {
+        <p class="renewal-text">
+          This permit is approved, so a renewal can be requested.
+        </p>
+
+        <ion-button expand="block" (click)="requestRenewal()">
+          Request renewal
+        </ion-button>
+      } @else if (record.renewalRequested) {
+        <ion-note class="notice" data-tone="done">
+          Renewal request recorded in this prototype.
+        </ion-note>
+      } @else {
+        <p class="renewal-text">
+          Renewal becomes available once the permit is approved.
+        </p>
+      }
+
+      <ion-note class="prototype-note">
+        Approval and renewal are handled by the market system. This screen is a
+        prototype view and does not send anything to the capstone backend.
+      </ion-note>
+    } @else {
+      <app-empty-state
+        title="Permit not found"
+        message="No hawker or ambulant permit matches this reference in the prototype data."
+      />
+    }
+  </div>
+</ion-content>

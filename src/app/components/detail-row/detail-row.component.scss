@@ -1,0 +1,51 @@
+:host {
+  display: block;
+}
+
+// Inline layout: a genuine ion-item row, so the divider between fields on a
+// detail page is Ionic's own — nothing here draws a border by hand.
+ion-item.detail-row {
+  --background: transparent;
+  --min-height: 0;
+  --padding-start: 0;
+  --inner-padding-end: 0;
+  --padding-top: 11px;
+  --padding-bottom: 11px;
+
+  ion-label {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--app-muted);
+  }
+}
+
+.detail-row__value {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--ion-text-color);
+  overflow-wrap: anywhere;
+}
+
+// Stacked layout: two fields side by side inside a record card, each its own
+// small label-over-value pair built from ion-note and ion-text.
+.detail-row--stacked {
+  display: block;
+
+  .detail-row__label {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .detail-row__value {
+    display: block;
+    margin-top: 2px;
+    font-size: 0.84rem;
+    font-weight: 500;
+  }
+}

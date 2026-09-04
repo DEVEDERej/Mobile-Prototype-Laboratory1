@@ -1,0 +1,70 @@
+// Home is the widest page in the app: on a tablet or desktop viewport the two
+// services can sit side by side, so it gets more room than the reading-heavy
+// detail pages. The toolbar padding is driven by the same variable (see
+// global.scss), so the title stays aligned with the column below it.
+:host {
+  --shell-max: 840px;
+}
+
+// ---------------------------------------------------------------------------
+// Services — the two primary destinations in the app, as genuine ion-cards
+// laid out with ion-grid. Angular's routerLink navigates the whole card
+// because ion-card's `button` input makes it a real tappable element.
+// ---------------------------------------------------------------------------
+
+.services {
+  padding: 0;
+  margin: 0 calc(var(--sp-3) / -2);
+  width: auto;
+
+  ion-row {
+    margin: 0;
+  }
+
+  ion-col {
+    padding: calc(var(--sp-3) / 2);
+  }
+}
+
+ion-card.service {
+  --background: var(--app-surface);
+  margin: 0;
+  min-height: 76px;
+
+  ion-card-title {
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    font-weight: 700;
+  }
+
+  ion-card-content {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--app-muted);
+  }
+}
+
+.service__meta {
+  margin: var(--sp-3) 0 0;
+  font-size: 0.76rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--app-muted);
+
+  span + span::before {
+    content: '·';
+    margin: 0 6px;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Recent activity — a plain ion-list, deliberately lighter than the Services
+// cards so it reads as secondary information.
+// ---------------------------------------------------------------------------
+
+ion-list.activity {
+  padding: 0;
+  background: transparent;
+}

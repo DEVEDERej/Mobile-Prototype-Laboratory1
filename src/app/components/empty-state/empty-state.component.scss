@@ -1,0 +1,31 @@
+:host {
+  display: block;
+}
+
+ion-card.empty-state {
+  --background: var(--app-surface);
+  margin: 0;
+
+  ion-card-content {
+    text-align: center;
+    padding: var(--sp-6) var(--sp-4);
+  }
+
+  h3 {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--ion-text-color);
+  }
+
+  p {
+    margin: var(--sp-2) auto 0;
+    max-width: 280px;
+    font-family: var(--font-body);
+    font-size: 0.83rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--app-muted);
+  }
+}

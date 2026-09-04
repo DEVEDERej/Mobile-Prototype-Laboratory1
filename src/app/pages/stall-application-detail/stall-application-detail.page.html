@@ -1,0 +1,94 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/stall-applications" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Application</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="shell">
+    @if (application(); as record) {
+      <header class="summary">
+        <p class="masthead__eyebrow">Stall Application</p>
+        <p class="reference">{{ record.referenceNo }}</p>
+        <h1 class="record-name">{{ record.applicantName }}</h1>
+
+        <app-status-chip
+          variant="chip"
+          [label]="record.status"
+          [tone]="statusTone(record.status)"
+        />
+      </header>
+
+      <app-section-heading heading="Application details" />
+
+      <ion-list class="fields">
+        <app-detail-row label="Requested stall" [value]="record.requestedStall" />
+        <app-detail-row label="Goods to sell" [value]="record.goodsToSell" />
+        <app-detail-row label="Submitted on" [value]="record.submittedOn" />
+        <app-detail-row label="Last updated" [value]="record.lastUpdatedOn" />
+      </ion-list>
+
+      <app-section-heading heading="Currently handled by" />
+
+      <ion-list class="office" lines="none">
+        <ion-item [detail]="false">
+          <ion-label>
+            <h3>{{ office() }}</h3>
+            <p>{{ officeResponsibility() }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+
+      <app-section-heading
+        heading="Application progress"
+        note="The statuses used by the market system, in order, with this application's current status marked."
+      />
+
+      <!--
+        The tracker is rendered from the status list the service exposes, so it
+        follows the order the capstone establishes. Each step binds its position
+        relative to the current status; the stylesheet, not the template, decides
+        what a passed, current or upcoming step looks like.
+
+        This is the one part of the app that stays a plain <ol>/<li> rather
+        than ion-list/ion-item: the connecting line between steps needs to be
+        positioned precisely against each marker, which Ionic has no
+        component for — there is no native "stepper" or "timeline" element.
+      -->
+      <ol class="track">
+        @for (status of statuses; track status) {
+          <li
+            class="track__step"
+            [attr.data-state]="stepPosition(status)"
+            [attr.data-tone]="statusTone(status)"
+          >
+            <span class="track__marker" aria-hidden="true"></span>
+
+            <div class="track__body">
+              <p class="track__name">{{ status }}</p>
+
+              @if (status === record.status) {
+                <p class="track__current">Current status</p>
+              }
+
+              <p class="track__office">{{ officeForStatus(status) }}</p>
+            </div>
+          </li>
+        }
+      </ol>
+
+      <ion-note class="prototype-note">
+        Treasury handles fee and payment concerns; CEEMO handles documents,
+        interview and decision. This screen is a prototype view of sample data.
+      </ion-note>
+    } @else {
+      <app-empty-state
+        title="Application not found"
+        message="No stall application matches this reference in the prototype data."
+      />
+    }
+  </div>
+</ion-content>
